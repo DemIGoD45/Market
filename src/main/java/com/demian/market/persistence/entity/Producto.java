@@ -1,7 +1,13 @@
 package com.demian.market.persistence.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -26,59 +32,12 @@ public class Producto {
 
     private boolean estado;
 
-    public Integer getIdProducto() {
-        return idProducto;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categorias categorias;
 
-    public void setIdProducto(Integer idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public String getCodigoBarras() {
-        return codigoBarras;
-    }
-
-    public void setCodigoBarras(String codigoBarras) {
-        this.codigoBarras = codigoBarras;
-    }
-
-    public Double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(Double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public Integer getCantidadStock() {
-        return cantidadStock;
-    }
-
-    public void setCantidadStock(Integer cantidadStock) {
-        this.cantidadStock = cantidadStock;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
+    /*
+    @OneToMany(mappedBy = "compra")
+    private List<ComprasProducto> compras;
+    */
 }

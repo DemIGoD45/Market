@@ -3,6 +3,7 @@ package com.demian.market.persistence.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "compras")
@@ -24,5 +25,10 @@ public class Compra {
 
     private Boolean estado;
 
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false) //Para que no permita crear nuevos clientes a partir de esta relacion
+    private Cliente cliente;
 
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> productos;
 }
